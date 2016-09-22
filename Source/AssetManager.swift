@@ -1,16 +1,17 @@
 import Foundation
 import UIKit
 
-public class AssetManager {
+open class AssetManager {
 
-  public static func getImage(name: String) -> UIImage {
+  open static func getImage(_ name: String) -> UIImage {
     let traitCollection = UITraitCollection(displayScale: 3)
-    var bundle = NSBundle(forClass: AssetManager.self)
-
-    if let bundlePath = bundle.resourcePath?.stringByAppendingString("/ImagePicker.bundle"), resourceBundle = NSBundle(path: bundlePath) {
+    var bundle = Bundle(for: AssetManager.self)
+    let bundlePath = (bundle.resourcePath)! + "/ImagePicker.bundle"
+    
+    if let resourceBundle = Bundle(path: bundlePath) {
       bundle = resourceBundle
     }
 
-    return UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection) ?? UIImage()
+    return UIImage(named: name, in: bundle, compatibleWith: traitCollection) ?? UIImage()
   }
 }
